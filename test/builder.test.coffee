@@ -189,6 +189,21 @@ module.exports =
     diffeq expected, actual
     test.finish()
 
+  'test forcing cdata': (test) ->
+    expected = """
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <xml>
+        <MsgId><![CDATA[5850440872586764820]]></MsgId>
+      </xml>
+
+    """
+    opts = forceCdata: true
+    builder = new xml2js.Builder opts
+    obj = {"xml":{"MsgId":["5850440872586764820"]}}
+    actual = builder.buildObject obj
+    diffeq expected, actual
+    test.finish()
+
   'test cdata text nodes with escaped end sequence': (test) ->
     expected = """
       <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

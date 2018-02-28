@@ -72,7 +72,7 @@ class exports.Builder
           # Case #3 Array data
           else if Array.isArray child
             for own index, entry of child
-              if typeof entry is 'string'
+              if typeof entry is 'string' || typeof entry is 'number'
                 if @options.forceCdata || (@options.cdata && requiresCDATA entry)
                   element = element.ele(key).raw(wrapCDATA entry).up()
                 else
@@ -84,7 +84,7 @@ class exports.Builder
           else if typeof child is "object"
             element = render(element.ele(key), child).up()
 
-          # Case #5 String and remaining types
+          # Case #5 String, Number and remaining types
           else
             if (typeof child is 'string' || typeof child is 'number') && (@options.forceCdata || (@options.cdata && requiresCDATA child))
               element = element.ele(key).raw(wrapCDATA child).up()

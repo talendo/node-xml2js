@@ -88,6 +88,8 @@ class exports.Builder
           else
             if typeof child is 'string' && (@options.forceCdata || (@options.cdata && requiresCDATA child))
               element = element.ele(key).raw(wrapCDATA child).up()
+            else if typeof child is 'number' && @options.forceCdata
+              element = element.ele(key).raw(wrapCDATA child.toString()).up()
             else
               if not child?
                 child = ''
